@@ -10,7 +10,6 @@ void clr_resize(std::vector<bool> &vis,int k) {
     vis.resize(k);
 }
 bool solve(int now,int rest) {
-    int i;
     if(now<0) return rest==0;
     if(vis[now][rest]) return f[now][rest];
     vis[now][rest]=true;
@@ -21,17 +20,16 @@ bool solve(int now,int rest) {
     if(((rest&1)^((n-cnt[now])&1))==s[now]-'0' && solve(now-1,(rest+n-cnt[now])/2)) {
         ans=true; fr[now][rest]=1;
     }
-    // printf("%d %d: %d\n",now,rest,ans);
     return f[now][rest]=ans;
 }
 void print(int now,int rest) {
     if(now<0) return;
     if(fr[now][rest]==0) {
         print(now-1,(rest+cnt[now])/2);
-        putchar('0');
+        std::cout<<'0';
     } else {
         print(now-1,(rest+n-cnt[now])/2);
-        putchar('1');
+        std::cout<<'1';
     }
 }
 void _() {
@@ -49,9 +47,8 @@ void _() {
         clr_resize(vis[i],n+1);
         fr[i].resize(n+1);
     }
-    // for(i=0;i<k;i++) printf("%d ",cnt[i]); puts("");
-    if(!solve(k-1,0)) puts("-1");
-    else print(k-1,0), puts("");
+    if(!solve(k-1,0)) std::cout<<"-1"<<std::endl;
+    else print(k-1,0), std::cout<<std::endl;
 }
 
 int main() {
