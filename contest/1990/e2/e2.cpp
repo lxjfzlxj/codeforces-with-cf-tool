@@ -31,24 +31,41 @@ void reply(int x) {
     printf("! %d\n",x); fflush(stdout);
     isfound=true;
 }
-void wait(int x,int lim) {
-    if(ask(leaf)) reply(leaf);
-    else {
-        int c=0;
-        while(ask(x) && c<=lim) ask(leaf), c++;
-        if(c>lim) reply(x);
-        else reply(fat[fat[x]]);
-    }
-}
 void work(int x) {
     for(auto v:e2[x]) {
         if(isfound) return;
         if(ask(v)) work(v);
+    }
+    if(!isfound) {
+        if(ask(leaf)) reply(leaf);
         else {
-            if(!ask(x)) reply(fat[fat[x]]);
+            int l,r,i,mid,siz;
+            for(i=1;i<B;i++) ask(leaf);
+            std::vector<int> t;
+            while(x!=1) {
+                t.push_back(fat[x]);
+                x=fat[x];
+            }
+            siz=t.size();
+            if(siz<=1) reply(1);
+            else {
+                l=0; r=siz-1;
+                while(r-l>1) {
+                    mid=l+r>>1;
+                    if(ask(t[mid])) r=mid;
+                    else {
+                        l=mid+1;
+                        r=std::min(r+1,siz-1);
+                    }
+                }
+                if(l==r) reply(1);
+                else {
+                    if(ask(t[l])) reply(t[l]);
+                    else reply(fat[t[r]]);
+                }
+            }
         }
     }
-    if(!isfound) wait(x,B);
 }
 void _() {
     int n,i,x,y;
