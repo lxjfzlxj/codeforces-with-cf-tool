@@ -5,3 +5,4 @@
 - 1991: [Pinely Round 4 (Div. 1 + Div. 2)](https://codeforces.com/contest/1991)
 - 1994: [Codeforces Round 959 sponsored by NEAR (Div. 1 + Div. 2)](https://codeforces.com/contest/1994)
 - 1995: [Codeforces Round 961 (Div. 2)](https://codeforces.com/contest/1995)
+- 1997: [Educational Codeforces Round 168 (Rated for Div. 2)](https://codeforces.com/contest/1997)
